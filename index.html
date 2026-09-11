@@ -56,8 +56,8 @@
       display: grid;
       grid-template-columns: 380px 1fr;
       gap: 2rem;
-      height: 100%;
-      align-items: center;
+      min-height: 85vh;
+      align-items: stretch;
     }
 
     .hero-card-dark {
@@ -68,7 +68,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      height: 85vh;
       box-shadow: 0 20px 40px rgba(0,0,0,0.08);
       position: relative;
       overflow: hidden;
@@ -203,7 +202,6 @@
       background-color: var(--card-white);
       border-radius: 24px;
       padding: 2.5rem;
-      height: 85vh;
       overflow-y: auto;
       display: flex;
       flex-direction: column;
@@ -274,7 +272,7 @@
 
     .timeline-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
 
-    /* ESTILO DE SKILLS & SOFTWARE */
+    /* SKILLS & SOFTWARE */
     .skills-category-block {
       display: flex;
       flex-direction: column;
@@ -576,6 +574,152 @@
       background-color: var(--accent-yellow);
       transform: scale(1.1);
     }
+
+    /* ==========================================================================
+       MEDIA QUERIES (RESPONSIVE COMPLETO)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .page {
+        padding: 2rem 2rem 5rem 2rem;
+      }
+
+      .hero-grid {
+        grid-template-columns: 320px 1fr;
+        gap: 1.5rem;
+      }
+
+      .reels-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .branding-split-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .branding-side-cards {
+        flex-direction: row;
+        height: 250px;
+      }
+
+      .figma-container {
+        height: 500px;
+      }
+
+      .posts-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .invitation-showcase-pro {
+        height: auto;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        overflow-x: hidden;
+      }
+
+      .portfolio-slider {
+        display: block;
+        width: 100vw;
+        height: auto;
+      }
+
+      .page {
+        width: 100vw;
+        height: auto;
+        min-height: 100vh;
+        padding: 1.5rem 1.25rem 6rem 1.25rem;
+      }
+
+      .nav-bar {
+        bottom: 1rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .hero-card-dark {
+        height: auto;
+        padding: 2rem 1.5rem;
+      }
+
+      .cv-card-light {
+        height: auto;
+        padding: 2rem 1.5rem;
+      }
+
+      .btn-contact {
+        position: static;
+        display: inline-block;
+        text-align: center;
+        margin-bottom: 1rem;
+        width: 100%;
+      }
+
+      .cv-two-columns {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .reels-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feeds-three-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .branding-side-cards {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .brand-card-small {
+        height: 200px;
+      }
+
+      .figma-container {
+        height: 400px;
+      }
+
+      .posts-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .invitation-showcase-pro {
+        flex-direction: column;
+        perspective: none;
+      }
+
+      .phone-mockup-pro, .phone-center-featured {
+        width: 240px;
+        height: 480px;
+        transform: none !important;
+        animation: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.6rem;
+      }
+
+      .reels-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .posts-grid-4 {
+        grid-template-columns: 1fr;
+      }
+    }
   </style>
 </head>
 <body>
@@ -583,7 +727,7 @@
   <div class="portfolio-slider" id="slider">
 
     <!-- PÁGINA 1: PORTADA & CV -->
-    <section class="page">
+    <section class="page" id="page-0">
       <div class="hero-grid">
         <div class="hero-card-dark">
           <div>
@@ -692,7 +836,7 @@
     </section>
 
     <!-- PÁGINA 2: REELS & FEEDS -->
-    <section class="page">
+    <section class="page" id="page-1">
       <div>
         <div class="page-header">
           <div><span class="section-header-tag">02 / PROYECTOS</span><h2 class="page-title">Contenido Audiovisual & Redes</h2></div>
@@ -715,7 +859,7 @@
     </section>
 
     <!-- PÁGINA 3: BRANDING Y FIGMA SPLIT GRID -->
-    <section class="page">
+    <section class="page" id="page-2">
       <div>
         <div class="page-header">
           <div>
@@ -745,7 +889,7 @@
     </section>
 
     <!-- PÁGINA 4: POSTS FEED -->
-    <section class="page">
+    <section class="page" id="page-3">
       <div>
         <div class="page-header">
           <div>
@@ -764,7 +908,7 @@
     </section>
 
     <!-- PÁGINA 5: INVITACIONES DIGITALES -->
-    <section class="page">
+    <section class="page" id="page-4">
       <div>
         <div class="page-header">
           <div>
@@ -841,9 +985,20 @@
     const slider = document.getElementById('slider');
     const dots = document.querySelectorAll('.dot');
 
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
     function goToPage(index) {
       currentPage = index;
-      slider.style.transform = `translateX(-${currentPage * 100}vw)`;
+      if (isMobile()) {
+        const targetPage = document.getElementById(`page-${index}`);
+        if (targetPage) {
+          targetPage.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        slider.style.transform = `translateX(-${currentPage * 100}vw)`;
+      }
       dots.forEach((dot, i) => dot.classList.toggle('active', i === currentPage));
     }
 
@@ -856,6 +1011,14 @@
       currentPage = (currentPage - 1 + totalPages) % totalPages;
       goToPage(currentPage);
     }
+
+    window.addEventListener('resize', () => {
+      if (!isMobile()) {
+        slider.style.transform = `translateX(-${currentPage * 100}vw)`;
+      } else {
+        slider.style.transform = 'none';
+      }
+    });
   </script>
 </body>
 </html>
