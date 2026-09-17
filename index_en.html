@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>María Cecilia Bordato Piga — Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-cream: #f4f2eb;
+      --card-dark: #19181f;
+      --card-white: #ffffff;
+      --text-dark: #19181f;
+      --text-muted: #737278;
+      --text-light: #ffffff;
+      --accent-purple: #8e7ae2;
+      --accent-yellow: #f1b80d;
+      --border-color: rgba(25, 24, 31, 0.08);
+      --font-main: 'Plus Jakarta Sans', -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* SLIDER PRINCIPAL */
+    .portfolio-slider {
+      display: flex;
+      width: 500vw;
+      height: 100vh;
+      transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .page {
+      width: 100vw;
+      height: 100vh;
+      padding: 2.5rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow-y: auto;
+    }
+
+    /* PÁGINA 1: CV & PERFIL */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 2rem;
+      min-height: 85vh;
+      align-items: stretch;
+    }
+
+    .hero-card-dark {
+      background-color: var(--card-dark);
+      color: var(--text-light);
+      border-radius: 24px;
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.4s ease;
+    }
+
+    .hero-card-dark:hover {
+      transform: translateY(-3px);
+    }
+
+    /* CONTENEDOR DE FOTO CON LUZ LILA Y DESTELLO */
+    .profile-photo-container {
+      position: relative;
+      width: 100%;
+      height: 250px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    .profile-photo-container::before {
+      content: '';
+      position: absolute;
+      width: 210px;
+      height: 210px;
+      background: radial-gradient(
+        circle, 
+        rgba(142, 122, 226, 0.55) 0%, 
+        rgba(142, 122, 226, 0.2) 45%, 
+        transparent 70%
+      );
+      filter: blur(28px);
+      border-radius: 50%;
+      z-index: 1;
+      transition: all 0.5s ease;
+    }
+
+    .profile-photo-container::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      right: 22%;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.35) 0%, rgba(142, 122, 226, 0.1) 50%, transparent 80%);
+      filter: blur(12px);
+      z-index: 2;
+    }
+
+    .profile-photo-container img {
+      position: relative;
+      z-index: 3;
+      height: 105%;
+      width: auto;
+      object-fit: contain;
+      filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.65)) 
+              contrast(1.05) 
+              brightness(1.02);
+      transition: transform 0.4s ease;
+    }
+
+    .hero-card-dark:hover .profile-photo-container img {
+      transform: scale(1.04) translateY(-3px);
+    }
+
+    .hero-card-dark:hover .profile-photo-container::before {
+      background: radial-gradient(
+        circle, 
+        rgba(142, 122, 226, 0.7) 0%, 
+        rgba(142, 122, 226, 0.25) 50%, 
+        transparent 75%
+      );
+      transform: scale(1.08);
+    }
+
+    .portfolio-badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--accent-purple);
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.1;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-subtitle {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .hero-skills-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.8rem;
+    }
+
+    .hero-chip {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #e0e0e0;
+      font-size: 0.68rem;
+      font-weight: 600;
+      padding: 0.25rem 0.6rem;
+      border-radius: 12px;
+      letter-spacing: 0.3px;
+    }
+
+    .contact-block {
+      margin-top: auto;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+    }
+
+    .cv-card-light {
+      background-color: var(--card-white);
+      border-radius: 24px;
+      padding: 2.5rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+      position: relative;
+    }
+
+    .btn-contact {
+      position: absolute;
+      top: 2.5rem;
+      right: 2.5rem;
+      background-color: var(--accent-yellow);
+      color: var(--text-dark);
+      padding: 0.7rem 1.4rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .btn-contact:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(241, 184, 13, 0.4);
+    }
+
+    .cv-two-columns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+    }
+
+    .section-header-tag {
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--text-dark);
+      margin-bottom: 0.75rem;
+      display: block;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.4rem;
+    }
+
+    .profile-description-text {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: #4a4950;
+      font-weight: 500;
+    }
+
+    .timeline-list { display: flex; flex-direction: column; gap: 0.85rem; }
+    .timeline-row { display: flex; justify-content: space-between; align-items: flex-start; }
+    .timeline-title { font-weight: 700; font-size: 0.9rem; color: var(--text-dark); }
+    .badge-present {
+      background-color: rgba(142, 122, 226, 0.15);
+      color: var(--accent-purple);
+      font-size: 0.65rem;
+      padding: 2px 6px;
+      border-radius: 10px;
+      font-weight: 700;
+      margin-left: 0.4rem;
+    }
+
+    .timeline-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* SKILLS & SOFTWARE */
+    .skills-category-block {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .pills-group { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .pill-item {
+      background-color: var(--bg-cream);
+      padding: 0.35rem 0.75rem;
+      border-radius: 16px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: all 0.2s ease;
+    }
+    
+    .pill-item.pill-highlight {
+      background-color: rgba(142, 122, 226, 0.12);
+      color: #5d48b8;
+      border: 1px solid rgba(142, 122, 226, 0.3);
+    }
+
+    .pill-item:hover {
+      background-color: var(--accent-purple);
+      color: #fff;
+    }
+
+    /* ENCABEZADOS Y GRID GENERALES */
+    .page-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 1.25rem; }
+    .page-title { font-size: 1.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: -0.5px; }
+
+    /* PÁGINA 2: REELS & FEEDS */
+    .reels-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+    .reel-card {
+      background: var(--card-white);
+      border-radius: 16px;
+      aspect-ratio: 9/16;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .reel-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 25px rgba(0,0,0,0.1);
+    }
+    .reel-card img, .reel-card video { width: 100%; height: 100%; object-fit: cover; }
+
+    .feeds-three-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .feed-card {
+      background: var(--card-white);
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease;
+    }
+    .feed-card:hover { transform: translateY(-4px); }
+    .feed-card img { width: 100%; display: block; object-fit: cover; }
+
+    /* PÁGINA 3: BRANDING Y FIGMA SPLIT GRID */
+    .branding-split-grid {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 1.5rem;
+      margin-top: 0.5rem;
+      height: 70vh;
+      align-items: center;
+    }
+
+    .branding-side-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    .brand-card-small {
+      background: var(--card-white);
+      border-radius: 16px;
+      flex: 1;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.03);
+      transition: transform 0.3s ease;
+    }
+
+    .brand-card-small:hover {
+      transform: translateY(-3px);
+    }
+
+    .brand-card-small img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .figma-container {
+      background: var(--card-white);
+      border-radius: 20px;
+      height: 100%;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.05);
+    }
+
+    .figma-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    /* PÁGINA 4: POSTS FEED */
+    .posts-grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .post-card-feed {
+      background: var(--card-white);
+      border-radius: 18px;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+      transition: transform 0.3s ease;
+    }
+
+    .post-card-feed:hover { transform: translateY(-6px); }
+    .post-card-feed img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* PÁGINA 5: INVITACIONES DIGITALES */
+    .invitation-showcase-pro {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 3.5rem;
+      height: 70vh;
+      margin-top: 1rem;
+      perspective: 1200px;
+    }
+
+    .phone-mockup-pro {
+      width: 250px;
+      height: 510px;
+      background: linear-gradient(145deg, #2c2b30, #111115);
+      border-radius: 48px;
+      padding: 9px;
+      position: relative;
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.45),
+        0 0 0 1px rgba(255, 255, 255, 0.15) inset;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+    }
+
+    .phone-button {
+      position: absolute;
+      background: #232227;
+      border-radius: 2px;
+    }
+    .btn-volume-up { left: -3px; top: 90px; width: 3px; height: 35px; }
+    .btn-volume-down { left: -3px; top: 135px; width: 3px; height: 35px; }
+    .btn-power { right: -3px; top: 110px; width: 3px; height: 50px; }
+
+    .phone-inner {
+      width: 100%;
+      height: 100%;
+      background: #000000;
+      border-radius: 40px;
+      overflow: hidden;
+      position: relative;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .dynamic-island {
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 18px;
+      background: #000000;
+      border-radius: 20px;
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    .phone-screen-pro {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #000;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .phone-screen-pro img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      border-radius: 36px;
+      display: block;
+    }
+
+    .iframe-wrapper {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 36px;
+    }
+
+    .iframe-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 375px;
+      height: 780px;
+      border: none;
+      background: #ffffff;
+      transform-origin: 0 0;
+      transform: scale(0.685);
+    }
+
+    .phone-side-left {
+      transform: rotateY(12deg) rotateX(4deg) translateZ(-20px);
+      animation: floatLeft 6s ease-in-out infinite alternate;
+    }
+
+    .phone-center-featured {
+      width: 275px;
+      height: 550px;
+      transform: translateZ(30px);
+      animation: floatCenter 5s ease-in-out infinite alternate;
+      box-shadow: 
+        0 35px 60px -15px rgba(142, 122, 226, 0.25),
+        0 0 0 1px rgba(255, 255, 255, 0.25) inset;
+    }
+
+    .phone-side-right {
+      transform: rotateY(-12deg) rotateX(4deg) translateZ(-20px);
+      animation: floatRight 6s ease-in-out infinite alternate 1s;
+    }
+
+    .phone-mockup-pro:hover {
+      transform: scale(1.06) rotateY(0deg) rotateX(0deg) translateZ(50px) translateY(-10px) !important;
+      box-shadow: 
+        0 40px 70px -15px rgba(0, 0, 0, 0.5),
+        0 0 25px rgba(241, 184, 13, 0.3);
+      z-index: 20;
+    }
+
+    @keyframes floatLeft {
+      0% { transform: rotateY(12deg) rotateX(4deg) translateY(0px) translateZ(-20px); }
+      100% { transform: rotateY(15deg) rotateX(2deg) translateY(-12px) translateZ(-20px); }
+    }
+
+    @keyframes floatCenter {
+      0% { transform: translateY(0px) translateZ(30px); }
+      100% { transform: translateY(-16px) translateZ(30px); }
+    }
+
+    @keyframes floatRight {
+      0% { transform: rotateY(-12deg) rotateX(4deg) translateY(0px) translateZ(-20px); }
+      100% { transform: rotateY(-15deg) rotateX(2deg) translateY(-12px) translateZ(-20px); }
+    }
+
+    /* NAVEGACIÓN INFERIOR */
+    .nav-bar {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%);
+      background: rgba(25, 24, 31, 0.9); padding: 0.6rem 1.2rem; border-radius: 40px;
+      display: flex; align-items: center; gap: 1.2rem; backdrop-filter: blur(10px); z-index: 100;
+    }
+    .nav-dots { display: flex; gap: 0.5rem; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.25); cursor: pointer; transition: all 0.3s; }
+    .dot.active { background: var(--accent-yellow); width: 22px; border-radius: 10px; }
+    .nav-arrow { 
+      background: #ffffff; 
+      border: none; 
+      width: 30px; 
+      height: 30px; 
+      border-radius: 50%; 
+      cursor: pointer; 
+      font-weight: bold; 
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+      transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+    .nav-arrow:hover {
+      background-color: var(--accent-yellow);
+      transform: scale(1.1);
+    }
+
+    /* ==========================================================================
+       MEDIA QUERIES (RESPONSIVE COMPLETO)
+       ========================================================================== */
+    @media (max-width: 1024px) {
+      .page {
+        padding: 2rem 2rem 5rem 2rem;
+      }
+
+      .hero-grid {
+        grid-template-columns: 320px 1fr;
+        gap: 1.5rem;
+      }
+
+      .reels-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .branding-split-grid {
+        grid-template-columns: 1fr;
+        height: auto;
+      }
+
+      .branding-side-cards {
+        flex-direction: row;
+        height: 250px;
+      }
+
+      .figma-container {
+        height: 500px;
+      }
+
+      .posts-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .invitation-showcase-pro {
+        height: auto;
+        flex-wrap: wrap;
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        overflow-x: hidden;
+      }
+
+      .portfolio-slider {
+        display: block;
+        width: 100vw;
+        height: auto;
+      }
+
+      .page {
+        width: 100vw;
+        height: auto;
+        min-height: 100vh;
+        padding: 1.5rem 1.25rem 6rem 1.25rem;
+      }
+
+      .nav-bar {
+        bottom: 1rem;
+        padding: 0.5rem 1rem;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .hero-card-dark {
+        height: auto;
+        padding: 2rem 1.5rem;
+      }
+
+      .cv-card-light {
+        height: auto;
+        padding: 2rem 1.5rem;
+      }
+
+      .btn-contact {
+        position: static;
+        display: inline-block;
+        text-align: center;
+        margin-bottom: 1rem;
+        width: 100%;
+      }
+
+      .cv-two-columns {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .reels-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feeds-three-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .branding-side-cards {
+        flex-direction: column;
+        height: auto;
+      }
+
+      .brand-card-small {
+        height: 200px;
+      }
+
+      .figma-container {
+        height: 400px;
+      }
+
+      .posts-grid-4 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .invitation-showcase-pro {
+        flex-direction: column;
+        perspective: none;
+      }
+
+      .phone-mockup-pro, .phone-center-featured {
+        width: 240px;
+        height: 480px;
+        transform: none !important;
+        animation: none !important;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero-title {
+        font-size: 1.6rem;
+      }
+
+      .reels-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .posts-grid-4 {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="portfolio-slider" id="slider">
+
+    <!-- PAGE 1: PORTFOLIO & CV -->
+    <section class="page" id="page-0">
+      <div class="hero-grid">
+        <div class="hero-card-dark">
+          <div>
+            <span class="portfolio-badge">• PORTFOLIO 2026</span>
+            
+            <div class="profile-photo-container">
+              <img src="foto-cecilia-corte.png?v=5" alt="María Cecilia Bordato Piga">
+            </div>
+            
+            <h1 class="hero-title">MARÍA CECILIA<br>BORDATO PIGA</h1>
+            <p class="hero-subtitle">Visual & Graphic Designer</p>
+
+            <div class="hero-skills-chips">
+              <span class="hero-chip">Brand Identity</span>
+              <span class="hero-chip">Social Media Strategy</span>
+              <span class="hero-chip">Audiovisual Editing</span>
+              <span class="hero-chip">Digital Design</span>
+            </div>
+          </div>
+
+          <div class="contact-block">
+            <p><strong>✉</strong> mceciliabordato@gmail.com</p>
+            <p><strong>📱</strong> 3854353913</p>
+            <p><strong>📍</strong> Santiago del Estero, Argentina</p>
+          </div>
+        </div>
+
+        <div class="cv-card-light">
+          <a href="mailto:mceciliabordato@gmail.com" class="btn-contact">Contact</a>
+
+          <div class="cv-two-columns">
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <div>
+                <span class="section-header-tag">About me</span>
+                <p class="profile-description-text">
+                  Graphic Designer with experience in institutional communication, social media design, and digital content management. I develop graphic assets, visual campaigns, and multichannel strategies while continuing to explore new fields like User Interface (UI) design and integrating AI tools to optimize my creative workflow.
+                </p>
+              </div>
+
+              <div>
+                <span class="section-header-tag">Experience</span>
+                <div class="timeline-list">
+                  <div class="timeline-row">
+                    <div>
+                      <span class="timeline-title">Public Prosecutor's Office</span>
+                      <span class="badge-present">Present</span>
+                      <p class="timeline-sub">Institutional Communication | 2019 — Present</p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div>
+                      <span class="timeline-title">BECO Marketing Agency</span>
+                      <p class="timeline-sub">Graphic Designer | 2022 — 2023</p>
+                    </div>
+                  </div>
+                  <div class="timeline-row">
+                    <div>
+                      <span class="timeline-title">Koru Agency</span>
+                      <p class="timeline-sub">Designer & Community Mgr | Freelance</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+              <div>
+                <span class="section-header-tag">Education</span>
+                <div class="timeline-list">
+                  <div>
+                    <span class="timeline-title">Bachelor's Degree in Social Communication</span>
+                    <p class="timeline-sub">UCSE (In progress, advanced level)</p>
+                  </div>
+                  <div style="margin-top: 0.5rem;">
+                    <span class="timeline-title">English Teacher Training</span>
+                    <p class="timeline-sub">Higher Institute No. 1 (In progress, advanced level)</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="skills-category-block">
+                <span class="section-header-tag">Software / Skills</span>
+                <div class="pills-group">
+                  <span class="pill-item">Photoshop</span>
+                  <span class="pill-item">Illustrator</span>
+                  <span class="pill-item">CorelDRAW</span>
+                  <span class="pill-item">Canva</span>
+                  <span class="pill-item">CapCut</span>
+                  <span class="pill-item">WordPress</span>
+                  <span class="pill-item pill-highlight">Figma</span>
+                  <span class="pill-item pill-highlight">AI Tools</span>
+                </div>
+              </div>
+
+              <div>
+                <span class="section-header-tag">Languages</span>
+                <p class="timeline-sub" style="font-size: 0.85rem; color: var(--text-dark);">
+                  <strong>Spanish:</strong> Native &nbsp;|&nbsp; <strong>English:</strong> Intermediate (Advanced)
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 2: REELS & FEEDS -->
+    <section class="page" id="page-1">
+      <div>
+        <div class="page-header">
+          <div><span class="section-header-tag">02 / PROJECTS</span><h2 class="page-title">Audiovisual & Social Media Content</h2></div>
+        </div>
+        <div class="reels-grid">
+          <div class="reel-card"><video src="Alberdi-reel.mp4" autoplay loop muted playsinline></video></div>
+          <div class="reel-card"><video src="appbse-reel.mp4" autoplay loop muted playsinline></video></div>
+          <div class="reel-card"><video src="Sol-reel.mp4" autoplay loop muted playsinline></video></div>
+          <div class="reel-card"><img src="historia1.png" alt=""></div>
+          <div class="reel-card"><img src="Historia3.png" alt=""></div>
+          <div class="reel-card"><img src="historia4.png" alt=""></div>
+        </div>
+        <p class="section-header-tag">FEATURED FEEDS</p>
+        <div class="feeds-three-grid">
+          <div class="feed-card"><img src="boho-feed.png" alt=""></div>
+          <div class="feed-card"><img src="bse-feed.png" alt=""></div>
+          <div class="feed-card"><img src="rosa-feed.png" alt=""></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 3: BRANDING & FIGMA SPLIT GRID -->
+    <section class="page" id="page-2">
+      <div>
+        <div class="page-header">
+          <div>
+            <span class="section-header-tag">03 / BRANDING</span>
+            <h2 class="page-title">Brand Identity & Interactive Brand Guidelines</h2>
+          </div>
+        </div>
+
+        <div class="branding-split-grid">
+          <div class="branding-side-cards">
+            <div class="brand-card-small">
+              <img src="brand-1.png" alt="Branding Merchandising">
+            </div>
+            <div class="brand-card-small">
+              <img src="brand-2.png" alt="Branding Cartelería Mariné">
+            </div>
+          </div>
+
+          <div class="figma-container">
+            <iframe 
+              src="https://embed.figma.com/proto/CmWpWHGxwUn06Y5QZ4feLm/Manual-trabajo-final--copia-?node-id=10021-19&starting-point-node-id=10021%3A19&scaling=contain&content-scaling=fixed&embed-host=share" 
+              allowfullscreen>
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 4: POSTS FEED -->
+    <section class="page" id="page-3">
+      <div>
+        <div class="page-header">
+          <div>
+            <span class="section-header-tag">04 / SOCIAL MEDIA</span>
+            <h2 class="page-title">Post Design & Campaigns</h2>
+          </div>
+        </div>
+
+        <div class="posts-grid-4">
+          <div class="post-card-feed"><img src="solpost1.png" alt="Post 1"></div>
+          <div class="post-card-feed"><img src="solpost2.png" alt="Post 2"></div>
+          <div class="post-card-feed"><img src="solpost3.png" alt="Post 3"></div>
+          <div class="post-card-feed"><img src="postbse1.png" alt="Post 4"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE 5: DIGITAL INVITATIONS -->
+    <section class="page" id="page-4">
+      <div>
+        <div class="page-header">
+          <div>
+            <span class="section-header-tag">05 / UI & DIGITAL PRODUCTS</span>
+            <h2 class="page-title">Interactive Digital Invitations</h2>
+          </div>
+        </div>
+
+        <div class="invitation-showcase-pro">
+          <div class="phone-mockup-pro phone-side-left">
+            <div class="phone-button btn-volume-up"></div>
+            <div class="phone-button btn-volume-down"></div>
+            <div class="phone-button btn-power"></div>
+            <div class="phone-inner">
+              <div class="dynamic-island"></div>
+              <div class="phone-screen-pro">
+                <img src="invitacion-1.jpeg" alt="Digital Invitation 1">
+              </div>
+            </div>
+          </div>
+
+          <div class="phone-mockup-pro phone-center-featured">
+            <div class="phone-button btn-volume-up"></div>
+            <div class="phone-button btn-volume-down"></div>
+            <div class="phone-button btn-power"></div>
+            <div class="phone-inner">
+              <div class="dynamic-island"></div>
+              <div class="phone-screen-pro">
+                <div class="iframe-wrapper">
+                  <iframe 
+                    src="https://valen-y-tomas.netlify.app/" 
+                    title="Valentina and Tomás Wedding Invitation"
+                    loading="lazy"
+                    allow="autoplay">
+                  </iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="phone-mockup-pro phone-side-right">
+            <div class="phone-button btn-volume-up"></div>
+            <div class="phone-button btn-volume-down"></div>
+            <div class="phone-button btn-power"></div>
+            <div class="phone-inner">
+              <div class="dynamic-island"></div>
+              <div class="phone-screen-pro">
+                <img src="invitacion-3.jpeg" alt="Digital Invitation 3">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- NAVIGATION -->
+  <div class="nav-bar">
+    <button class="nav-arrow" onclick="prevPage()">‹</button>
+    <div class="nav-dots">
+      <div class="dot active" onclick="goToPage(0)"></div>
+      <div class="dot" onclick="goToPage(1)"></div>
+      <div class="dot" onclick="goToPage(2)"></div>
+      <div class="dot" onclick="goToPage(3)"></div>
+      <div class="dot" onclick="goToPage(4)"></div>
+    </div>
+    <button class="nav-arrow" onclick="nextPage()">›</button>
+  </div>
+
+  <script>
+    let currentPage = 0;
+    const totalPages = 5;
+    const slider = document.getElementById('slider');
+    const dots = document.querySelectorAll('.dot');
+
+    function isMobile() {
+      return window.innerWidth <= 768;
+    }
+
+    function goToPage(index) {
+      currentPage = index;
+      if (isMobile()) {
+        const targetPage = document.getElementById(`page-${index}`);
+        if (targetPage) {
+          targetPage.scrollIntoView({ behavior: 'smooth' });
+        }
+      } else {
+        slider.style.transform = `translateX(-${currentPage * 100}vw)`;
+      }
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === currentPage));
+    }
+
+    function nextPage() {
+      currentPage = (currentPage + 1) % totalPages;
+      goToPage(currentPage);
+    }
+
+    function prevPage() {
+      currentPage = (currentPage - 1 + totalPages) % totalPages;
+      goToPage(currentPage);
+    }
+
+    window.addEventListener('resize', () => {
+      if (!isMobile()) {
+        slider.style.transform = `translateX(-${currentPage * 100}vw)`;
+      } else {
+        slider.style.transform = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
