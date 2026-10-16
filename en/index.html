@@ -388,6 +388,12 @@
       transform: scale(0.685);
     }
 
+    /* Iframe scale per mockup size. Inner viewport is 375x780.
+       sides 250x510 -> usable 232x492  |  center 275x550 -> usable 257x532 */
+    .phone-side-left .iframe-wrapper iframe,
+    .phone-side-right .iframe-wrapper iframe { transform: scale(0.6187); }
+    .phone-center-featured .iframe-wrapper iframe { transform: scale(0.6853); }
+
     .phone-side-left { transform: rotateY(12deg) rotateX(4deg) translateZ(-20px); animation: floatLeft 6s ease-in-out infinite alternate; }
     .phone-center-featured {
       width: 275px; height: 550px;
@@ -460,6 +466,9 @@
       .posts-grid-4 { grid-template-columns: repeat(2, 1fr); }
       .invitation-showcase-pro { flex-direction: column; perspective: none; }
       .phone-mockup-pro, .phone-center-featured { width: 240px; height: 480px; transform: none !important; animation: none !important; }
+      .phone-side-left .iframe-wrapper iframe,
+      .phone-side-right .iframe-wrapper iframe,
+      .phone-center-featured .iframe-wrapper iframe { transform: scale(0.592); }
     }
 
     @media (max-width: 480px) {
@@ -673,7 +682,14 @@
             <div class="phone-inner">
               <div class="dynamic-island"></div>
               <div class="phone-screen-pro">
-                <img src="../invitacion-1.jpeg" alt="Digital Invitation 1">
+                <div class="iframe-wrapper">
+                  <iframe
+                    src="../demo/xv-camila/"
+                    title="Interactive digital invitation - Sweet Fifteen"
+                    loading="lazy"
+                    allow="autoplay">
+                  </iframe>
+                </div>
               </div>
             </div>
           </div>
@@ -686,9 +702,9 @@
               <div class="dynamic-island"></div>
               <div class="phone-screen-pro">
                 <div class="iframe-wrapper">
-                  <iframe 
-                    src="https://valen-y-tomas.netlify.app/" 
-                    title="Valentina and Tomás Wedding Invitation"
+                  <iframe
+                    src="../demo/casamiento/"
+                    title="Interactive digital invitation - Wedding"
                     loading="lazy"
                     allow="autoplay">
                   </iframe>
@@ -704,7 +720,14 @@
             <div class="phone-inner">
               <div class="dynamic-island"></div>
               <div class="phone-screen-pro">
-                <img src="../invitacion-3.jpeg" alt="Digital Invitation 3">
+                <div class="iframe-wrapper">
+                  <iframe
+                    src="../demo/cumple-infantil/"
+                    title="Interactive digital invitation - Kids birthday"
+                    loading="lazy"
+                    allow="autoplay">
+                  </iframe>
+                </div>
               </div>
             </div>
           </div>
